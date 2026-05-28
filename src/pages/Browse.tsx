@@ -1,7 +1,10 @@
+import SpeciesCard from "../components/SpeciesCard"
 
 const Browse = () => {
   return (
-    <div>Browse</div>
+    <div className="bg-neutral-900">
+      <SpeciesCard />
+    </div>
   )
 }
 
