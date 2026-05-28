@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import './App.css'
 import { fetchSpecies } from './services/speciesService'
 import Navbar from './components/Navbar'
+import Browse from './pages/Browse'
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
   return (
     <>
     <Navbar />
+    <Browse />
     </>
   )
 }
