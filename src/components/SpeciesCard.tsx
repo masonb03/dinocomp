@@ -1,6 +1,7 @@
 import { fetchSpecies } from '../services/speciesService'
 import { useState, useEffect } from 'react'
 import type { Species } from '../types/species'
+import { periodColors } from '../types/species'
 
 const SpeciesCard = () => {
     const [species, setSpecies] = useState<Species[]>([]);
@@ -19,7 +20,10 @@ const SpeciesCard = () => {
                 <h2 className="text-white font-bold text-lg">{s.commonName}</h2>
                 <p className="text-neutral-400 italic">{s.scientificName}</p>
                 <div className="flex justify-between items-center mt-2 mb-3">
-                    <p className="text-neutral-400 border border-white rounded-xl py-1 px-3 font-bold">{s.period}</p>
+                    <p style={{ 
+                        color: periodColors[s.period], 
+                        borderColor: periodColors[s.period], 
+                        backgroundColor: periodColors[s.period] + '20'}} className="text-neutral-400 border border-white rounded-xl py-1 px-3 font-bold">{s.period}</p>
                     <p className="text-neutral-400">{s.lengthM}m</p>
                 </div>
                 <button className=" flex justify-center m-auto w-full p-2 border border-neutral-500 rounded-xl cursor-pointer text-white font-bold hover:bg-neutral-900 transition duration-300">+ Add</button>
