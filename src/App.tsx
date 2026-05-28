@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import './App.css'
 import { fetchSpecies } from './services/speciesService'
+import Navbar from './components/Navbar'
 
 function App() {
 
@@ -9,7 +10,9 @@ function App() {
   }, [])
 
   return (
-    <div className="p-4">Dinocomp</div>
+    <>
+    <Navbar />
+    </>
   )
 }
 
