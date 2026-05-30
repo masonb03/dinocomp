@@ -2,7 +2,7 @@ export interface Species {
     id: string,
     commonName: string,
     scientificName: string,
-    clade: 'theropod' | 'sauropod' | 'ornithichian',
+    clade: 'theropod' | 'sauropod' | 'ornithischian',
     period: 'Triassic' | 'Jurassic' | 'Cretaceous',
     diet: 'carnivore' | 'herbivore' | 'omnivore',
     lengthM: number,
