@@ -11,3 +11,9 @@ export interface Species {
     discoveryYear: number,
     description: string
 }
+
+export const periodColors: Record<Species['period'], string> = {
+    'Triassic': '#facc15',
+    'Jurassic': '#fca5a5',
+    'Cretaceous': '#65a30d'
+}

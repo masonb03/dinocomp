@@ -1,4 +1,5 @@
 import type { Species } from '../types/species'
+import { periodColors } from '../types/species'
 
 type SpeciesCardProps = {
     species: Species
