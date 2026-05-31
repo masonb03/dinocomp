@@ -22,6 +22,7 @@ const Browse = () => {
     diet: [],
     continent: []
   });
+  const [sortBy, setSortBy] = useState<'name' | 'lengthM' | 'massKg'>('name');
 
   useEffect(() => {
     fetchSpecies().then(data => setSpecies(data))
@@ -36,6 +37,13 @@ const Browse = () => {
 
     return matchesSearch && matchesPeriod && matchesClade && matchesDiet && matchesContinent;
   });
+
+    const sortedSpecies = [...filteredSpecies].sort((a, b) => {
+      if (sortBy === 'name') return a.commonName.localeCompare(b.commonName);
+      if (sortBy === 'lengthM') return b.lengthM - a.lengthM;
+      if (sortBy === 'massKg') return b.massKg - a.massKg;
+      return 0;
+    })
 
 
   const handledFilterChange = (category: FilterCategory, value: string) => {
@@ -57,11 +65,24 @@ const Browse = () => {
           onFilterChange={handledFilterChange}
         />
       </div>
-      <div className="flex-1 overflow-y-auto-hidden p-4">
+      <div className='flex-1 flex flex-col overflow-hidden p-4'>
+      <div className='flex justify-between items-center mb-4'>
+        <span className='text-neutral-400 text-sm'>{sortedSpecies.length} species</span>
+        <select
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value as 'name' | 'lengthM' | 'massKg')}
+        className='bg-neutral-800 border border-neutral-600 text-white text-sm rounded-lg p-2'>
+          <option value="name">Name A-Z</option>
+          <option value="lengthM">Length</option>
+          <option value="massKg">Mass</option>
+        </select>
+      </div>
+      <div className="flex-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden p-4">
         <div className="grid grid-cols-3 gap-4">
-          {filteredSpecies.map(s => (
+          {sortedSpecies.map(s => (
             <SpeciesCard key={s.id} species={s} />
           ))}
+          </div>
         </div>
       </div>
     </div>
