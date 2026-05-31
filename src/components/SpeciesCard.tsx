@@ -1,11 +1,18 @@
+import { useDispatch, useSelector } from 'react-redux'
 import type { Species } from '../types/species'
 import { periodColors } from '../types/species'
+import { addSpecies, removeSpecies } from '../redux/quereSlice'
+import type { RootState } from '../redux/store'
 
 type SpeciesCardProps = {
     species: Species
 }
 
 const SpeciesCard = ({species}: SpeciesCardProps) => {
+    
+    const queue = useSelector((state: RootState) => state.queue.species);
+    const inTray = queue.some(q => q.id === species.id);
+    const dispatch = useDispatch();
 
   return (
             <div className=" bg-neutral-800 border border-neutral-600 rounded-xl p-4 cursor-pointer">
@@ -24,7 +31,12 @@ const SpeciesCard = ({species}: SpeciesCardProps) => {
                     </p>
                     <p className="text-neutral-400">{species.lengthM}m</p>
                 </div>
-                <button className=" flex justify-center m-auto w-full p-2 border border-neutral-500 rounded-xl cursor-pointer text-white font-bold hover:bg-neutral-900 transition duration-300">+ Add</button>
+                <button 
+                className={inTray ? `flex justify-center m-auto w-full p-2 border border-neutral-500 rounded-xl cursor-pointer text-white font-bold hover:bg-neutral-900 transition duration-300` : `flex justify-center m-auto w-full p-2 border border-neutral-500 rounded-xl cursor-pointer text-neutral-400 font-bold hover:bg-neutral-700 transition duration-300`} 
+                onClick={() => {
+                    dispatch(inTray ? removeSpecies(species.id) : addSpecies(species));}}>
+                    {inTray ? '✓In tray' : '+ Add'}
+                </button>
             </div>
   )
 }

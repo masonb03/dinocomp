@@ -56,28 +56,29 @@ const Browse = () => {
 }
 
   return (
-    <div className="flex h-[calc(100vh-60px)]">
-      <div className="w-48 flex-shrink-0 overflow-y-auto p-4">
+    <div className="flex h-full">
+      <div className="w-64 shrink-0 overflow-y-auto p-4">
         <FilterSidebar
           searchQuery={searchQuery}
           selectedFilter={selectedFilter}
           onSearchChange={setSearchQuery}
           onFilterChange={handledFilterChange}
+          species={species}
         />
       </div>
       <div className='flex-1 flex flex-col overflow-hidden p-4'>
       <div className='flex justify-between items-center mb-4'>
-        <span className='text-neutral-400 text-sm'>{sortedSpecies.length} species</span>
+        <span className='text-neutral-400 text-lg'>{sortedSpecies.length} species</span>
         <select
         value={sortBy}
         onChange={(e) => setSortBy(e.target.value as 'name' | 'lengthM' | 'massKg')}
-        className='bg-neutral-800 border border-neutral-600 text-white text-sm rounded-lg p-2'>
+        className='bg-neutral-800 border border-neutral-600 text-white text-lg font-semibold rounded-lg p-2 w-11/12'>
           <option value="name">Name A-Z</option>
           <option value="lengthM">Length</option>
           <option value="massKg">Mass</option>
         </select>
       </div>
-      <div className="flex-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden p-4">
+      <div className="flex-1 overflow-y-auto scrollbar:none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden p-4">
         <div className="grid grid-cols-3 gap-4">
           {sortedSpecies.map(s => (
             <SpeciesCard key={s.id} species={s} />
