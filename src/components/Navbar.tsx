@@ -7,7 +7,7 @@ const Navbar = () => {
         <TbDna2 className="text-2xl text-lime-500"/>
         <h1 className="text-xl font-bold">Dino <span className="text-lime-500">Comp</span></h1>
         <ul className="flex gap-8 ml-auto cursor-pointer forced-colors:appearance-auto font-bold">
-            <NavLink to="/browse"
+            <NavLink to="/"
             className={({ isActive }) => isActive ? "bg-neutral-800 px-3 py-1 rounded-md" : "px-3 py-1"}
             >
                 Browse
