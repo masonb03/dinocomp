@@ -17,3 +17,8 @@ export const periodColors: Record<Species['period'], string> = {
     'Jurassic': '#fca5a5',
     'Cretaceous': '#65a30d'
 }
+
+export const highlightColors = {
+  best: { color: '#3B6D11', borderColor: '#3B6D11', backgroundColor: '#EAF3DE' },
+  second: { color: '#854F0B', borderColor: '#854F0B', backgroundColor: '#FAEEDA' }
+}

@@ -1,10 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from '../redux/store'
 import { removeSpecies } from '../redux/quereSlice'
+import { useNavigate } from 'react-router-dom'
 
 const CompareTray = () => {
   const dispatch = useDispatch()
   const queue = useSelector((state: RootState) => state.queue.species)
+  const navigate = useNavigate()
 
   return (
     <div className='flex items-center gap-4 p-4 bg-neutral-800 border border-neutral-600 rounded-xl'>
@@ -27,7 +29,8 @@ const CompareTray = () => {
           </div>
         ))}
       </div>
-      <button className='border border-neutral-500 hover:bg-neutral-700 transition text-white font-bold p-3 px-5 rounded-xl whitespace-nowrap'>
+      <button className='border border-neutral-500 hover:bg-neutral-700 transition text-white font-bold p-3 px-5 rounded-xl whitespace-nowrap'
+      onClick={() => navigate('/compare')}>
         Compare →
       </button>
     </div>

@@ -19,11 +19,10 @@ function App() {
       <Navbar />
       <div className='flex-1 overflow-hidden'>
         <Routes>
-          <Route path="/browse" element={<Browse />} />
+          <Route path="/" element={<Browse />} />
           <Route path='/about' element={<About />} />
           <Route path="/compare" element={<Compare />} />
         </Routes>
-        <Browse />
       </div>
       <CompareTray />
     </div>
