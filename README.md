@@ -2,7 +2,7 @@ Dinocomp is a dinosaur species comparator made for dinosaur lovers all alike. Wh
 
 Features ✨
 - Browse voew rendering all species cards with nname, period badge and esitmated length
-- Filter sidebar correctly filter speceis based on selected inputs.
+- Filter sidebar correctly filter species based on selected inputs.
 - Compare view render side by side table
 - Live search input filters species in real time
 - Responsive layout and works across all screen sizes.
