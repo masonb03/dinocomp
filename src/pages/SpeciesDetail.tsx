@@ -53,8 +53,8 @@ const SpeciesDetail = () => {
               color: periodColors[species.period],
               borderColor: periodColors[species.period],
               backgroundColor: periodColors[species.period] + '20' }} >{species.period}</p>
-            <p className='border px-2 rounded-xl bg-neutral-500 font-semibold text-neutral-800'>{species.clade}</p>
-            <p className='border px-2 rounded-xl bg-neutral-500 font-semibold text-neutral-800'>{species.diet}</p>
+            <p className='border px-2 rounded-xl bg-neutral-500 text-lg font-semibold text-neutral-800'>{species.clade}</p>
+            <p className='border px-2 rounded-xl bg-neutral-500 text-lg font-semibold text-neutral-800'>{species.diet}</p>
           </div>
           <div className='grid grid-cols-2 gap-4'>
             <div className='bg-neutral-700 text-white p-2 rounded-xl'>
