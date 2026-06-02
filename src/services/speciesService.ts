@@ -1,6 +1,6 @@
 import type { Species } from "../types/species";
 import { db } from "../firestore/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, getDoc, doc } from "firebase/firestore";
 
 export async function fetchSpecies(): Promise<Species[]> {
     const snapshot = await getDocs(collection(db, 'species'))
@@ -8,4 +8,10 @@ export async function fetchSpecies(): Promise<Species[]> {
         id: doc.id,
         ...doc.data()
     })) as Species[]
+}
+
+export async function fetchSpeciesById(id: string): Promise<Species | null> {
+    const snapshot = await getDoc(doc(db, 'species', id))
+    if (!snapshot.exists()) return null
+    return { id: snapshot.id, ...snapshot.data() } as Species
 }
