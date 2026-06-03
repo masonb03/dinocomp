@@ -3,6 +3,7 @@ import type { RootState } from "../redux/store"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { highlightColors } from "../types/species"
+import SizeChart from "../components/SizeChart"
 
 
 const Compare = () => {
@@ -114,6 +115,7 @@ const Compare = () => {
             </tr>
           </tbody>
         </table>
+      <SizeChart queue={queue} />
       </div>
       <div className='flex items-center gap-4 p-4 text-sm text-neutral-500 border-t border-neutral-600'>
         <span style={highlightColors.best} className='rounded-lg px-2 py-1 font-semibold'>

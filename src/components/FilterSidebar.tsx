@@ -29,7 +29,7 @@ const FilterSidebar = ({ searchQuery, selectedFilter, onSearchChange, onFilterCh
         <div className="mb-4">
             <h3 className="text-neutral-500 font-bold mb-2">Period</h3>
             <div className="flex flex-col gap-2">
-                <label className="flex items-center gap-2 w-full">
+                <label key={'cretaceous-${selectedFilter.period.includes("Cretaceous")}' } className="flex items-center gap-2 w-full">
                     <input 
                     type="checkbox" 
                     className="form-checkbox" 
@@ -39,7 +39,7 @@ const FilterSidebar = ({ searchQuery, selectedFilter, onSearchChange, onFilterCh
                     <span className="text-white flex-1">Cretaceous</span>
                     <span className=' bg-neutral-600 rounded-full px-2 py-1 text-sm'>{species.filter(s => s.period === "Cretaceous").length}</span>
                 </label>
-                <label className="flex items-center gap-2 w-full">
+                <label key={'jurassic-${selectedFilter.period.includes("Jurassic")}' } className="flex items-center gap-2 w-full">
                     <input 
                     type="checkbox" 
                     className="form-checkbox" 
@@ -49,7 +49,7 @@ const FilterSidebar = ({ searchQuery, selectedFilter, onSearchChange, onFilterCh
                     <span className="text-white flex-1">Jurassic</span>
                     <span className='bg-neutral-600 rounded-full px-2 py-1 text-sm'>{species.filter(s => s.period === "Jurassic").length}</span>
                 </label>
-                <label className="flex items-center gap-2 w-full">
+                <label key={'triassic-${selectedFilter.period.includes("Triassic")}' } className="flex items-center gap-2 w-full">
                     <input 
                     type="checkbox" 
                     className="form-checkbox" 

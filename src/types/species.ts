@@ -9,7 +9,8 @@ export interface Species {
     massKg: number,
     continent: string,
     discoveryYear: number,
-    description: string
+    description: string,
+    imageUrl?: string
 }
 
 export const periodColors: Record<Species['period'], string> = {

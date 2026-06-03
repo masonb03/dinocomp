@@ -13,16 +13,18 @@ const CompareTray = () => {
       <h2 className='text-neutral-600 text-sm whitespace-nowrap'>Comparator</h2>
       <div className='flex gap-3 flex-1'>
         {[0, 1, 2, 3].map(i => (
-          <div key={i} className='flex-1'>
+          <div key={queue[i]?.id ?? `empty-${i}`} className="flex-1">
             {queue[i] ? (
-              <div className='flex items-center justify-between border border-neutral-500 rounded-xl p-3 text-sm text-white'>
-                <span className='truncate'>{queue[i].commonName}</span>
-                <button onClick={() => dispatch(removeSpecies(queue[i].id))} aria-label={`Remove ${queue[i].commonName}`}>
-                  <i className='ti ti-x text-neutral-400 text-medium cursor-pointer' aria-hidden="true">X</i>
+              <div className="slot-in flex items-center justify-between border border-neutral-500 rounded-xl p-3 text-sm text-white">
+                <span className="truncate">{queue[i].commonName}</span>
+                <button onClick={() => dispatch(removeSpecies(queue[i].id))} aria-label={`Remove ${queue[i].commonName}`}
+                  className="text-neutral-400 hover:text-white ml-2 shrink-0 cursor-pointer bg-transparent border-none">
+                  ×
+                  <i className="ti ti-x text-neutral-400 cursor-pointer" aria-hidden="true"></i>
                 </button>
               </div>
             ) : (
-              <div className='border border-dashed border-neutral-500 rounded-xl p-3 text-neutral-600 text-sm text-center'>
+              <div className="border border-dashed border-neutral-500 rounded-xl p-3 text-neutral-600 text-sm text-center">
                 + empty slot
               </div>
             )}
