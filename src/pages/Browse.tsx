@@ -50,7 +50,7 @@ const Browse = () => {
   const handledFilterChange = (category: FilterCategory, value: string) => {
     setSelectedFilter(prev => ({
         ...prev,
-        [category]: prev[category].includes(value)
+        [category]: (prev[category] as string[]).includes(value)
             ? prev[category].filter(v => v !== value)
             : [...prev[category], value]
     }));
