@@ -5,6 +5,8 @@ import { collection, getDocs, getDoc, doc } from "firebase/firestore";
 export async function fetchSpecies(): Promise<Species[]> {
     try {
         const snapshot = await getDocs(collection(db, 'species'))
+        console.log('Snapshot size:', snapshot.size)
+        console.log('Docs:', snapshot.docs.length)
         return snapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
