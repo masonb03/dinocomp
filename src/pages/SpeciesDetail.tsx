@@ -35,15 +35,24 @@ const SpeciesDetail = () => {
         <p className='text-xl font-bold text-neutral-300'>Species Details</p>
       </div>
       <div className='flex-1 p-4 flex gap-6 overflow-hidden'>
-        <div className="w-1/3 h-full bg-neutral-700 rounded-md flex items-end justify-center mb-4">
-          <i className="ti ti-bone text-neutral-500 text-2xl" aria-hidden="true"></i>
-          <div className='bg-neutral-900 w-full flex items-center justify-center p-4 rounded-br-md rounded-bl-md'>
-            <button 
-            className='bg-neutral-800 text-white p-2 rounded-xl hover:bg-neutral-600 transition duration-300 border border-white cursor-pointer'
-            onClick={() => { dispatch(inTray ? removeSpecies(species.id) : addSpecies(species));}}>
-            {inTray ? '✓In tray' : '+ Add to comparator'}</button>
-          </div>
+        <div className="w-1/3 flex flex-col rounded-xl overflow-hidden">
+        <div className="h-3/4 flex items-center justify-center bg-neutral-700">
+          {species.imageUrl ? (
+            <img 
+              src={species.imageUrl} 
+              alt={species.commonName} 
+              className="w-full h-full object-contain p-4 mx-auto"
+            />
+          ) : (
+            <i className="ti ti-bone text-neutral-500 text-5xl" aria-hidden="true"></i>
+          )}
         </div>
+        <div className='bg-neutral-900 w-full flex items-center justify-center p-4 rounded-br-md rounded-bl-md'>
+          <button className='bg-neutral-800 text-white p-2 rounded-xl hover:bg-neutral-600 transition duration-300 border border-white cursor-pointer' onClick={() => dispatch(inTray ? removeSpecies(species.id) : addSpecies(species))}>
+            {inTray ? '✓ In comparator' : '+ Add to comparator'}
+          </button>
+        </div>
+      </div>
         <div className='w-1/2 p-4 overflow-y-auto'>
           <h1 className='text-white text-2xl font-bold'>{species.commonName}</h1>
           <p className='text-neutral-500 italic'>{species.scientificName}</p>

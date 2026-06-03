@@ -3,3 +3,33 @@
 body {
     background-color: rgb(31, 31, 31);
 }
+
+@keyframes pulse-badge {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.badge-pulse {
+  animation: pulse-badge 0.3s ease-in-out;
+}
+
+@keyframes check-pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.check-pop {
+  animation: check-pop 0.25s ease-out;
+}
+
+@keyframes slot-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.slot-in {
+  animation: slot-in 0.2s ease-out;
+}

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import type { Species } from "../types/species";
 import { fetchSpecies } from "../services/speciesService";
 import FilterSidebar from "../components/FilterSidebar";
+import SkeletonCard from "../components/SkeletonCard";
 
 type FilterCategory = 'clade' | 'period' | 'diet' | 'continent';
 
@@ -14,6 +15,7 @@ type SelectedFilters = {
 }
 
 const Browse = () => {
+  const [loading, setLoading] = useState(true);
   const [species, setSpecies] = useState<Species[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilter, setSelectedFilter] = useState<SelectedFilters>
@@ -26,8 +28,12 @@ const Browse = () => {
   const [sortBy, setSortBy] = useState<'name' | 'lengthM' | 'massKg'>('name');
 
   useEffect(() => {
-    fetchSpecies().then(data => setSpecies(data))
-  }, [])
+    setLoading(true);
+    fetchSpecies().then(data => {
+      setSpecies(data);
+      setLoading(false);
+    });
+  }, []);
 
   const filteredSpecies = species.filter(s => {
     const matchesSearch = s.commonName.toLowerCase().includes(searchQuery.toLowerCase());
@@ -81,9 +87,15 @@ const Browse = () => {
       </div>
       <div className="flex-1 overflow-y-auto scrollbar:none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden p-4">
         <div className="grid grid-cols-3 gap-4">
-          {sortedSpecies.map(s => (
-            <SpeciesCard key={s.id} species={s} />
-          ))}
+          {loading ? (
+            Array.from({ length: 6 }).map((_, i) => (
+              <SkeletonCard key={i} />
+            ))
+          ) : (
+            sortedSpecies.map(s => (
+              <SpeciesCard key={s.id} species={s} />
+            ))
+          )}
           </div>
         </div>
       </div>

@@ -22,11 +22,6 @@ const Navbar = () => {
             >
                 About
             </NavLink>
-            <NavLink to="/tray"
-            className={({ isActive }) => isActive ? "bg-neutral-800 px-3 py-1 rounded-md" : "px-3 py-1"}
-            >
-                Tray
-            </NavLink>
         </ul>
     </div>
 )}
