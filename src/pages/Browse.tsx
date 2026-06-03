@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import type { Species } from "../types/species";
 import { fetchSpecies } from "../services/speciesService";
 import FilterSidebar from "../components/FilterSidebar";
+import { filterSpecies } from "../utils/filterSpecies";
 
 type FilterCategory = 'clade' | 'period' | 'diet' | 'continent';
 
@@ -14,9 +15,11 @@ type SelectedFilters = {
 }
 
 const Browse = () => {
+  const filterSpecies = filterSpecies(species, selectedFilter, searchQuery);
   const [species, setSpecies] = useState<Species[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedFilter, setSelectedFilter] = useState<SelectedFilters>({
+  const [selectedFilter, setSelectedFilter] = useState<SelectedFilters>
+  ({
     clade: [],
     period: [],
     diet: [],
