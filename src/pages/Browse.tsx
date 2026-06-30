@@ -4,6 +4,8 @@ import type { Species } from "../types/species";
 import { fetchSpecies } from "../services/speciesService";
 import FilterSidebar from "../components/FilterSidebar";
 import SkeletonCard from "../components/SkeletonCard";
+import CompareTray from '../components/CompareTray'
+
 
 type FilterCategory = 'clade' | 'period' | 'diet' | 'continent';
 
@@ -98,6 +100,9 @@ const Browse = () => {
           )}
           </div>
         </div>
+      </div>
+      <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-neutral-700 bg-neutral-900/95 backdrop-blur">
+        <CompareTray />
       </div>
     </div>
   )

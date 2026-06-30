@@ -4,8 +4,8 @@ import About from './pages/About'
 import Compare from './pages/Compare'
 import Browse from './pages/Browse'
 import SpeciesDetail from './pages/SpeciesDetail'
-import CompareTray from './components/CompareTray'
 import { Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
 
 function App() {
 
@@ -15,13 +15,13 @@ function App() {
       <Navbar />
       <div className='flex-1 overflow-hidden'>
         <Routes>
-          <Route path="/" element={<Browse />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/browse" element={<Browse />} />
           <Route path='/about' element={<About />} />
           <Route path="/compare" element={<Compare />} />
           <Route path='/species/:id' element={<SpeciesDetail />}/>
         </Routes>
       </div>
-      <CompareTray />
     </div>
   )
 }
