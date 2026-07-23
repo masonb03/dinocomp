@@ -29,7 +29,7 @@ const SpeciesDetail = () => {
     <div className='flex flex-col h-full'>
       <div className='flex items-center gap-4 p-4 bg-neutral-800 border border-neutral-600'>
         <button className='border border-neutral-500 hover:bg-neutral-700 transition text-white font-bold p-3 px-5 rounded-xl whitespace-nowrap cursor-pointer'
-        onClick={() => navigate('/')}>
+        onClick={() => navigate('/browse')}>
           Browse
         </button>
         <p className='text-xl font-bold text-neutral-300'>Species Details</p>

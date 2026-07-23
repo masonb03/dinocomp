@@ -64,9 +64,17 @@ const Browse = () => {
     }));
 }
 
-  return (
-    <div className="flex h-full">
-      <div className="w-64 shrink-0 overflow-y-auto p-4">
+return (
+  <div className="h-screen flex flex-col bg-bg-deep">
+    <div className="p-10 pb-4">
+      <h1 className="font-display font-bold text-5xl text-bone uppercase">Browse Species</h1>
+      <p className="text-lg text-stone w-1/4 mt-2">
+        Forty species across periods, clades, and continents. Filter, search, and add up to four to the comparator.
+      </p>
+    </div>
+
+    <div className="flex flex-1 overflow-hidden">
+      <div className="w-64 shrink-0 overflow-y-auto h-full [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden scrollbar-width p-4 pb-35">
         <FilterSidebar
           searchQuery={searchQuery}
           selectedFilter={selectedFilter}
@@ -75,37 +83,36 @@ const Browse = () => {
           species={species}
         />
       </div>
-      <div className='flex-1 flex flex-col overflow-hidden p-4'>
-      <div className='flex justify-between items-center mb-4'>
-        <span className='text-neutral-400 text-lg'>{sortedSpecies.length} species</span>
-        <select
-        value={sortBy}
-        onChange={(e) => setSortBy(e.target.value as 'name' | 'lengthM' | 'massKg')}
-        className='bg-neutral-800 border border-neutral-600 text-white text-lg font-semibold rounded-lg p-2 w-11/12'>
-          <option value="name">Name A-Z</option>
-          <option value="lengthM">Length</option>
-          <option value="massKg">Mass</option>
-        </select>
-      </div>
-      <div className="flex-1 overflow-y-auto scrollbar:none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden p-4">
-        <div className="grid grid-cols-3 gap-4">
-          {loading ? (
-            Array.from({ length: 6 }).map((_, i) => (
-              <SkeletonCard key={i} />
-            ))
-          ) : (
-            sortedSpecies.map(s => (
-              <SpeciesCard key={s.id} species={s} />
-            ))
-          )}
+
+      <div className="flex-1 flex flex-col overflow-hidden p-4">
+        <div className="flex items-center mb-4 gap-2">
+          <span className="text-stone/50 text-lg font-mono">{sortedSpecies.length} species</span>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as 'name' | 'lengthM' | 'massKg')}
+            className="bg-surface border border-neutral-600 text-white text-lg font-light font-mono rounded-lg p-2 w-80"
+          >
+            <option value="name">Name A-Z</option>
+            <option value="lengthM">Length</option>
+            <option value="massKg">Mass</option>
+          </select>
+        </div>
+
+        <div className="flex-1 overflow-y-auto [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden p-4 pb-20">
+          <div className="grid grid-cols-3 gap-4">
+            {loading
+              ? Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)
+              : sortedSpecies.map(s => <SpeciesCard key={s.id} species={s} />)}
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-neutral-700 bg-neutral-900/95 backdrop-blur">
-        <CompareTray />
-      </div>
     </div>
-  )
+
+    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-neutral-700 bg-neutral-900/95 backdrop-blur">
+      <CompareTray />
+    </div>
+  </div>
+)
 }
 
 export default Browse
