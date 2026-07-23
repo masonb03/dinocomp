@@ -9,32 +9,51 @@ const CompareTray = () => {
   const navigate = useNavigate()
 
   return (
-    <div className='flex items-center gap-4 p-4 bg-neutral-800 border border-neutral-600 rounded-xl'>
-      <h2 className='text-neutral-600 text-sm whitespace-nowrap'>Comparator</h2>
-      <div className='flex gap-3 flex-1'>
+    <div className="flex items-center gap-4 px-6 py-4 bg-surface border-t border-white/8">
+      
+      <div className="flex flex-col shrink-0">
+        <span className="font-mono text-xs uppercase tracking-widest text-stone">Comparator</span>
+        <span className="font-mono text-xs text-stone/50 mt-0.5">Add up to 4 species</span>
+      </div>
+
+      <div className="flex gap-3 flex-1">
         {[0, 1, 2, 3].map(i => (
           <div key={queue[i]?.id ?? `empty-${i}`} className="flex-1">
             {queue[i] ? (
-              <div className="slot-in flex items-center justify-between border border-neutral-500 rounded-xl p-3 text-sm text-white">
-                <span className="truncate">{queue[i].commonName}</span>
-                <button onClick={() => dispatch(removeSpecies(queue[i].id))} aria-label={`Remove ${queue[i].commonName}`}
-                  className="text-neutral-400 hover:text-white ml-2 shrink-0 cursor-pointer bg-transparent border-none">
-                  ×
-                  <i className="ti ti-x text-neutral-400 cursor-pointer" aria-hidden="true"></i>
+              <div className="slot-in flex items-center justify-between border border-acid/40 bg-acid/8 rounded px-3 py-2.5">
+                <span className="font-display font-bold text-sm text-bone uppercase truncate">
+                  {queue[i].commonName}
+                </span>
+                <button
+                  onClick={() => dispatch(removeSpecies(queue[i].id))}
+                  aria-label={`Remove ${queue[i].commonName}`}
+                  className="text-stone hover:text-bone ml-2 shrink-0 cursor-pointer bg-transparent border-none transition-colors duration-150"
+                >
+                  <i className="ti ti-x text-sm" aria-hidden="true" />
                 </button>
               </div>
             ) : (
-              <div className="border border-dashed border-neutral-500 rounded-xl p-3 text-neutral-600 text-sm text-center">
+              <div className="border border-dashed border-white/12 rounded px-3 py-2.5 text-stone/40 text-xs font-mono text-center">
                 + empty slot
               </div>
             )}
           </div>
         ))}
       </div>
-      <button className='border border-neutral-500 hover:bg-neutral-700 transition text-white font-bold p-3 px-5 rounded-xl whitespace-nowrap'
-      onClick={() => navigate('/compare')}>
-        Compare →
-      </button>
+
+      <div className="flex flex-col items-end shrink-0 gap-1">
+        <button
+          className="bg-acid text-bg-deep font-mono text-xs uppercase tracking-widest font-bold px-6 py-3 rounded transition-all duration-200 hover:bg-acid/90 hover:-translate-y-0.5 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+          onClick={() => navigate('/compare')}
+          disabled={queue.length < 2}
+        >
+          Compare →
+        </button>
+        {queue.length < 2 && (
+          <span className="font-mono text-xs text-stone/40">Select at least 2 species</span>
+        )}
+      </div>
+
     </div>
   )
 }

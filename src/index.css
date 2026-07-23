@@ -7,6 +7,7 @@
     --color-stone:#8a8175;
     --color-acid:#c4ff4d;
     --color-rust:#b5651d;
+    --border:rgba(232,226,212,0.08);
 }
 
 @theme {
