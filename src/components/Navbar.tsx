@@ -19,8 +19,8 @@ const Navbar = () => {
             flex
             justify-between
             items-center
-            px-10
-            py-8
+            px-4 sm:px-10
+            py-4 sm:py-8
             text-white
             bg-black/20
             border-b
@@ -30,8 +30,8 @@ const Navbar = () => {
             flex
             justify-between
             items-center
-            px-8
-            py-4
+            px-4 sm:px-8
+            py-3 sm:py-4
             text-white
             bg-neutral-900
             border-b
@@ -39,9 +39,9 @@ const Navbar = () => {
           `
       }
     >
-        <TbDna2 className="text-4xl text-lime-500 pt-1 "/>
-        <NavLink to="/" className="text-3xl font-bold font-display">Dino <span className="text-lime-500">Comp</span></NavLink>
-        <ul className="flex gap-8 ml-auto cursor-pointer forced-colors:appearance-auto font-bold">
+        <TbDna2 className="text-2xl sm:text-4xl text-lime-500 pt-1 "/>
+        <NavLink to="/" className="text-lg sm:text-3xl font-bold font-display">Dino <span className="text-lime-500">Comp</span></NavLink>
+        <ul className="flex gap-3 sm:gap-8 ml-auto cursor-pointer forced-colors:appearance-auto font-bold text-sm sm:text-base">
             <NavLink to="/browse"
             className={({ isActive }) => isActive ? "bg-neutral-800 px-3 py-1 rounded-md" : "px-3 py-1"}
             >
