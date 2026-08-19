@@ -11,9 +11,8 @@ function App() {
 
 
   return (
-    <div className='flex flex-col h-screen'>
+    <div className='min-h-screen lg:h-screen'>
       <Navbar />
-      <div className='flex-1 overflow-hidden'>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/browse" element={<Browse />} />
@@ -21,7 +20,6 @@ function App() {
           <Route path="/compare" element={<Compare />} />
           <Route path='/species/:id' element={<SpeciesDetail />}/>
         </Routes>
-      </div>
     </div>
   )
 }
