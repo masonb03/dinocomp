@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import type { Species } from '../types/species'
 import { fetchSpeciesById } from '../services/speciesService'
 import { useNavigate } from 'react-router-dom'
-import {periodColors} from '../types/species'
+import { periodColors } from '../types/species'
 import type { RootState } from '../redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { addSpecies, removeSpecies } from '../redux/quereSlice'
@@ -23,73 +23,198 @@ const SpeciesDetail = () => {
     }
   }, [id]);
 
-  if (!species) return <div className='text-white p-4'>Loading...</div>;
+  if (!species) return <div className="text-bone p-4 font-mono text-sm">Loading...</div>;
 
   return (
-    <div className='flex flex-col h-full'>
-      <div className='flex items-center gap-4 p-4 bg-neutral-800 border border-neutral-600'>
-        <button className='border border-neutral-500 hover:bg-neutral-700 transition text-white font-bold p-3 px-5 rounded-xl whitespace-nowrap cursor-pointer'
-        onClick={() => navigate('/browse')}>
-          Browse
+    <div className="flex flex-col min-h-screen bg-bg-deep lg:h-full lg:min-h-0">
+
+      {/* Header */}
+      <div className="
+        flex
+        items-center
+        gap-4
+        p-4
+        sm:p-5
+        border-b
+        border-border
+      ">
+        <button
+          className="
+            font-mono
+            text-xs
+            sm:text-sm
+            font-semibold
+            uppercase
+            tracking-wider
+            border
+            border-border
+            hover:border-stone
+            hover:bg-surface
+            transition
+            text-bone
+            px-4
+            sm:px-5
+            py-2.5
+            rounded-full
+            whitespace-nowrap
+            cursor-pointer
+          "
+          onClick={() => navigate('/browse')}
+        >
+          ← Browse
         </button>
-        <p className='text-xl font-bold text-neutral-300'>Species Details</p>
+
+        <p className="font-mono text-[11px] sm:text-xs uppercase tracking-widest text-stone">
+          Browse / <span className="text-bone">Species Details</span>
+        </p>
       </div>
-      <div className='flex-1 p-4 flex gap-6 overflow-hidden'>
-        <div className="w-1/3 flex flex-col rounded-xl overflow-hidden">
-        <div className="h-3/4 flex items-center justify-center bg-neutral-700">
-          {species.imageUrl ? (
-            <img 
-              src={species.imageUrl} 
-              alt={species.commonName} 
-              className="w-full h-full object-contain p-4 mx-auto"
-            />
-          ) : (
-            <i className="ti ti-bone text-neutral-500 text-5xl" aria-hidden="true"></i>
-          )}
-        </div>
-        <div className='bg-neutral-900 w-full flex items-center justify-center p-4 rounded-br-md rounded-bl-md'>
-          <button className='bg-neutral-800 text-white p-2 rounded-xl hover:bg-neutral-600 transition duration-300 border border-white cursor-pointer' onClick={() => dispatch(inTray ? removeSpecies(species.id) : addSpecies(species))}>
-            {inTray ? '✓ In comparator' : '+ Add to comparator'}
-          </button>
-        </div>
-      </div>
-        <div className='w-1/2 p-4 overflow-y-auto'>
-          <h1 className='text-white text-2xl font-bold'>{species.commonName}</h1>
-          <p className='text-neutral-500 italic'>{species.scientificName}</p>
-          <div className='flex gap-6 my-4'>
-            <p className='border px-2 rounded-xl text-lg font-bold' 
-            style={{
-              color: periodColors[species.period],
-              borderColor: periodColors[species.period],
-              backgroundColor: periodColors[species.period] + '20' }} >{species.period}</p>
-            <p className='border px-2 rounded-xl bg-neutral-500 text-lg font-semibold text-neutral-800'>{species.clade}</p>
-            <p className='border px-2 rounded-xl bg-neutral-500 text-lg font-semibold text-neutral-800'>{species.diet}</p>
+
+      {/* Content */}
+      <div className="
+        flex-1
+        min-h-0
+        overflow-y-auto
+        flex
+        flex-col
+        md:flex-row
+        md:items-stretch
+        gap-8
+        sm:gap-10
+        p-6
+        sm:p-10
+        lg:p-12
+        max-w-[1600px]
+        mx-auto
+        w-full
+      ">
+
+        {/* Image panel */}
+        <div className="
+          w-full
+          md:w-[44%]
+          md:max-w-155
+          flex-shrink-0
+          flex
+          flex-col
+          border
+          border-border
+          rounded-3xl
+          overflow-hidden
+          bg-surface
+        ">
+          <div className="relative flex-1 min-h-105 flex items-center justify-center p-8 sm:p-12">
+            <span className="
+              absolute
+              top-5
+              left-5
+              font-mono
+              text-[10.5px]
+              uppercase
+              tracking-widest
+              text-stone
+              border
+              border-border
+              rounded-full
+              px-3
+              py-1.5
+            ">
+              Discovered {species.discoveryYear}
+            </span>
+
+            {species.imageUrl ? (
+              <img
+                src={species.imageUrl}
+                alt={species.commonName}
+                className="w-full h-full object-contain opacity-90"
+              />
+            ) : (
+              <i className="ti ti-bone text-stone text-5xl" aria-hidden="true"></i>
+            )}
           </div>
-          <div className='grid grid-cols-2 gap-4'>
-            <div className='bg-neutral-700 text-white p-2 rounded-xl'>
-              <p className='text-neutral-400 '>Length</p>
-              <span className='font-bold text-xl'>{species.lengthM} m</span>
-            </div>
-            <div className='bg-neutral-700 text-white p-2 rounded-xl'>
-              <p className='text-neutral-400 '>Mass</p>
-              <span className='font-bold text-xl'>{species.massKg} kg</span>
-            </div>
-            <div className='bg-neutral-700 text-white p-2 rounded-xl'>
-              <p className='text-neutral-400 '>Continent</p>
-              <span className='font-bold text-xl'>{species.continent}</span>
-            </div>
-            <div className='bg-neutral-700 text-white p-2 rounded-xl'>
-              <p className='text-neutral-400 '>Discovered</p>
-              <span className='font-bold text-xl'>{species.discoveryYear}</span>
-            </div>
-           </div>
-           <div className='mt-6 text-neutral-500'>
-            <h2>Description</h2>
-            <p>{species.description}</p>
-           </div>
+
+          <div className="p-5 sm:p-6 border-t border-border">
+            <button
+              className={`
+                w-full
+                font-mono
+                text-sm
+                font-semibold
+                uppercase
+                tracking-wider
+                py-4
+                rounded-full
+                border
+                border-acid
+                transition
+                cursor-pointer
+                ${inTray
+                  ? 'bg-acid text-bg-deep'
+                  : 'bg-transparent text-acid hover:bg-acid/10'}
+              `}
+              onClick={() => dispatch(inTray ? removeSpecies(species.id) : addSpecies(species))}
+            >
+              {inTray ? '✓ In Comparator' : '+ Add to Comparator'}
+            </button>
           </div>
         </div>
+
+        {/* Detail panel */}
+        <div className="flex-1 min-w-0 flex flex-col justify-center px-1 sm:px-2">
+          <h1 className="font-display font-extrabold uppercase text-4xl sm:text-5xl lg:text-6xl leading-[0.95] text-bone mb-2.5">
+            {species.commonName}
+          </h1>
+          <p className="font-sans italic text-base sm:text-lg text-stone mb-8">
+            {species.scientificName}
+          </p>
+
+          <div className="flex flex-wrap gap-3 mb-10">
+            <span
+              className="font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider px-4 sm:px-4.5 py-2 sm:py-2.5 rounded-full border"
+              style={{
+                color: periodColors[species.period],
+                borderColor: periodColors[species.period],
+                backgroundColor: periodColors[species.period] + '20',
+              }}
+            >
+              {species.period}
+            </span>
+            <span className="font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider px-4 sm:px-4.5 py-2 sm:py-2.5 rounded-full border border-border text-stone">
+              {species.clade}
+            </span>
+            <span className="font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider px-4 sm:px-4.5 py-2 sm:py-2.5 rounded-full border border-border text-stone">
+              {species.diet}
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 sm:gap-5 mb-10 sm:mb-11">
+            <div className="bg-surface border border-border rounded-3xl px-6 sm:px-7 py-5 sm:py-6">
+              <p className="font-mono text-[11px] sm:text-xs uppercase tracking-widest text-stone mb-2.5">Length</p>
+              <span className="font-mono text-2xl sm:text-3xl lg:text-4xl font-semibold text-bone">{species.lengthM} m</span>
+            </div>
+            <div className="bg-surface border border-border rounded-3xl px-6 sm:px-7 py-5 sm:py-6">
+              <p className="font-mono text-[11px] sm:text-xs uppercase tracking-widest text-stone mb-2.5">Mass</p>
+              <span className="font-mono text-2xl sm:text-3xl lg:text-4xl font-semibold text-bone">{species.massKg} kg</span>
+            </div>
+            <div className="bg-surface border border-border rounded-3xl px-6 sm:px-7 py-5 sm:py-6">
+              <p className="font-mono text-[11px] sm:text-xs uppercase tracking-widest text-stone mb-2.5">Continent</p>
+              <span className="font-mono text-2xl sm:text-3xl lg:text-4xl font-semibold text-bone">{species.continent}</span>
+            </div>
+            <div className="bg-surface border border-border rounded-3xl px-6 sm:px-7 py-5 sm:py-6">
+              <p className="font-mono text-[11px] sm:text-xs uppercase tracking-widest text-stone mb-2.5">Discovered</p>
+              <span className="font-mono text-2xl sm:text-3xl lg:text-4xl font-semibold text-bone">{species.discoveryYear}</span>
+            </div>
+          </div>
+
+          <div>
+            <p className="font-mono text-[11px] sm:text-xs uppercase tracking-widest text-stone mb-3.5">Description</p>
+            <p className="font-sans text-base sm:text-lg leading-relaxed text-bone max-w-[62ch]">
+              {species.description}
+            </p>
+          </div>
+        </div>
+
       </div>
+    </div>
   )
 }
 
